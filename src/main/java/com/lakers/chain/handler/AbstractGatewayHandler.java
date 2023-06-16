@@ -1,29 +1,25 @@
 package com.lakers.chain.handler;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 /**
  * Created on 2023/6/15 16:37
  *
  * @author lakers
  */
-public  class GatewayHandler {
+public abstract class AbstractGatewayHandler {
 
-    private GatewayHandler nextGatewayHandler;
+    public AbstractGatewayHandler nextGatewayHandler;
 
+    protected abstract void doFilter();
 
-
-    public void setNext(GatewayHandler gatewayHandler) {
+    public void setNext(AbstractGatewayHandler gatewayHandler) {
         this.nextGatewayHandler = gatewayHandler;
     }
 
-    public static void main(String[] args) {
-        String s = "abcda";
-        int[][] queries = {{3, 3, 0}, {1, 2, 0}, {0, 3, 1}, {0, 3, 2}, {0, 4, 1}};
-        List<Boolean> booleans = new GatewayHandler().canMakePaliQueries(s, queries);
-        System.out.println(booleans);
-    }sou
+    public void startFilter() {
+        doFilter();
+        while (nextGatewayHandler != null) {
+            nextGatewayHandler.doFilter();
+            nextGatewayHandler = nextGatewayHandler.nextGatewayHandler;
+        }
+    }
 }

@@ -7,7 +7,7 @@ import com.lakers.chain.handler.AbstractGatewayHandler;
  *
  * @author lakers
  */
-public class BackListLimitGatewayHandler extends AbstractGatewayHandler {
+public class BlackListLimitGatewayHandler extends AbstractGatewayHandler {
     @Override
     public void doFilter() {
         System.out.println("黑名单限流");
